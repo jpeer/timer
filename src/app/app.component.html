@@ -2,6 +2,10 @@
   {{title}}
 </h1>
 
+<ul>
+  <li *ngFor="let t of currentSession; let idx = index">{{t | time}}&nbsp;<i class="fa fa-times" aria-hidden="true" (click)="removeMeasurement(idx)"></i></li>
+</ul>
+
 
     <h1>{{elapsed | time}} !</h1>
 

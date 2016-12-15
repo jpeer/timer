@@ -12,15 +12,14 @@ export class AppComponent {
   running : boolean;
   elapsed : number = 0;
   timer : Subscription;
+  currentSession : number[] = [];
 
   updateElapsed() {
     this.elapsed = new Date().getTime() - this.lastStart;
-    //console.log(this.elapsed);
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeydown(ev: KeyboardEvent) : void {
-    console.log("yep!")
 
     if(!this.running) {
       this.running = true;
@@ -30,7 +29,12 @@ export class AppComponent {
     } else {
       this.running = false;
       this.timer.unsubscribe();
+      this.currentSession.push(this.elapsed);
     }
+  }
+
+  removeMeasurement(idx : number) {
+    this.currentSession.splice(idx, 1);
   }
 
 }
