@@ -1,6 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs/Rx';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {CubeService} from './cube.service';
+
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ export class AppComponent implements OnInit {
   scramble : string[];
   service : CubeService;
 
-  constructor(service : CubeService) {
+  constructor(service : CubeService, private modalService: NgbModal) {
     this.service = service;
   }
 
@@ -27,6 +29,15 @@ export class AppComponent implements OnInit {
   updateElapsed() : void {
     this.elapsed = new Date().getTime() - this.lastStart;
   }
+
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+
+    }, (reason) => {
+
+    });
+  }
+
 
   @HostListener('document:keydown', ['$event'])
   onKeydown(ev: KeyboardEvent) : void {
