@@ -1,20 +1,30 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs/Rx';
+import {CubeService} from './cube.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app works2!';
+export class AppComponent implements OnInit {
   lastStart : number;
   running : boolean;
   elapsed : number = 0;
   timer : Subscription;
-  currentSession : number[] = [];
+  currentSession : Object[] = [];
+  scramble : string[];
+  service : CubeService;
 
-  updateElapsed() {
+  constructor(service : CubeService) {
+    this.service = service;
+  }
+
+  ngOnInit() : void {
+    this.service.getNextScramble().subscribe(result => {this.scramble = result;});
+  }
+
+  updateElapsed() : void {
     this.elapsed = new Date().getTime() - this.lastStart;
   }
 
@@ -27,9 +37,10 @@ export class AppComponent {
       this.timer = Observable.timer(0, 50).subscribe(n => this.updateElapsed());
 
     } else {
+      this.updateElapsed();
       this.running = false;
       this.timer.unsubscribe();
-      this.currentSession.push(this.elapsed);
+      this.currentSession.push({ time: this.elapsed, scramble: this.scramble });
     }
   }
 

@@ -1,12 +1,12 @@
 <h1>
-  {{title}}
+  Cube Success
 </h1>
 
 <ul>
-  <li *ngFor="let t of currentSession; let idx = index">{{t | time}}&nbsp;<i class="fa fa-times" aria-hidden="true" (click)="removeMeasurement(idx)"></i></li>
+  <li *ngFor="let obj of currentSession; let idx = index">{{obj.time | time}}&nbsp;{{obj.scramble}}&nbsp;<i class="fa fa-times" aria-hidden="true" (click)="removeMeasurement(idx)"></i></li>
 </ul>
 
-
-    <h1>{{elapsed | time}} !</h1>
+<p class="scramble">New Scramble: {{scramble}}</p>
+<p class="timer">{{elapsed | time}} !</p>
 
 

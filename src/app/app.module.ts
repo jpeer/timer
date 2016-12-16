@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { TimePipe } from './time.pipe';
+import { CubeService } from './cube.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { TimePipe } from './time.pipe';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [CubeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

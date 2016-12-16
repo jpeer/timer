@@ -17,7 +17,7 @@ export class TimePipe implements PipeTransform {
 
   transform(value: number, args?: any): any {
 
-    let millis = value % 1000;
+    let decis = Math.floor((value % 1000)/10);
 
     value = Math.floor(value / 1000);
     let seconds = value % 60;
@@ -38,13 +38,11 @@ export class TimePipe implements PipeTransform {
     result += this.format(seconds);
     result += ":";
 
-    if(millis < 10) {
+
+    if(decis < 10) {
       result += "0";
     }
-    if(millis < 100) {
-      result += "0";
-    }
-    result += this.format(millis);
+    result += decis;
 
     return result;
   }
