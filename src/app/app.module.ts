@@ -11,12 +11,15 @@ import { TimePipe } from './time.pipe';
 import { CubeService } from './cube.service';
 import { AuthService } from "./auth.service";
 import { ChartComponent } from './chart/chart.component';
+import { TimerComponent } from './timer/timer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TimePipe,
-    ChartComponent
+    ChartComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,

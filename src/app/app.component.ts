@@ -10,10 +10,7 @@ import {Measurement} from "./measurement";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  lastStart: number;
-  running: boolean;
-  elapsedTime: number = 0;
-  timer: Subscription;
+
   currentSession: Measurement[] = [];
   totalHistory: Measurement[] = [];
   scramble: string[];
@@ -42,24 +39,8 @@ export class AppComponent implements OnInit {
       });
   }
 
-  updateElapsed(): void {
-    this.elapsedTime = new Date().getTime() - this.lastStart;
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  onKeydown(ev: KeyboardEvent): void {
-
-    if (!this.running) {
-      this.running = true;
-      this.lastStart = new Date().getTime();
-      this.timer = Observable.timer(0, 50).subscribe(n => this.updateElapsed());
-
-    } else {
-      this.updateElapsed();
-      this.running = false;
-      this.timer.unsubscribe();
-      this.currentSession.push({startTime: this.lastStart, elapsedTime: this.elapsedTime, scramble: this.scramble});
-    }
+  onTimerDone(event: Measurement) {
+    this.currentSession.push(event);
   }
 
   removeMeasurement(idx: number) {
