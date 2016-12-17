@@ -10,7 +10,7 @@ export class ChartComponent  {
   @Input('multi')
   multi;
 
-  view: any[] = [700, 400];
+  view: any[] = [ 700, 400 ];
 
   // options
   showXAxis = true;
