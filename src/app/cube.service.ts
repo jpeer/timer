@@ -18,11 +18,11 @@ export class CubeService {
     return this.http.get("/getMeasurements/" + usertoken).map(res => res.json().measurements);
   }
 
-  postMeasurements(measurements: Measurement[], userToken: string) : Observable<Measurement[]> {
+  persistMeasurements(measurements: Measurement[], userToken: string) : Observable<Measurement[]> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post("/addMeasurements", { measurements: measurements, userToken : userToken  }, options).map(res => res.json().measurements);
+    return this.http.post("/persistMeasurements", { measurements: measurements, userToken : userToken  }, options).map(res => res.json().measurements);
   }
 
 

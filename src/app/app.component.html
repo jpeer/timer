@@ -13,11 +13,13 @@
   </ul>
 </nav>
 
-
 <div class="container-fluid" style="background-color: aquamarine">
+  <p class="scramble" (click)="requestNewScramble()" >{{scramble | scramblepipe}}</p>
+</div>
+
+<div class="container-fluid" style="background-color: greenyellow">
   <div class="row">
     <div class="col-sm-6">
-      <p class="scramble">New Scramble: {{scramble}}</p>
       <app-timer (onDone)="onTimerDone($event)" [scramble]="scramble"></app-timer>
     </div>
     <div class="col-sm-6">
@@ -43,12 +45,13 @@
     </thead>
     <tbody>
     <tr *ngFor="let m of totalHistory.slice().reverse(); let idx = index">
-      <td>{{totalHistory.length - idx - 1}}</td>
-      <td>{{m.startTime}}</td>
+      <td>{{totalHistory.length - idx}}</td>
+      <td>{{m.startTime | date}}</td>
       <td>{{m.elapsedTime | time}}</td>
       <td>{{m.scramble}}</td>
-      <td><i class="fa fa-times" aria-hidden="true" (click)="removeMeasurement(idx)"></i></td>
+      <td><i class="fa fa-times" aria-hidden="true" (click)="removeMeasurement(totalHistory.length - idx - 1)"></i></td>
     </tr>
     </tbody>
   </table>
 </div>
+

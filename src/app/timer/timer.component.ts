@@ -23,12 +23,20 @@ export class TimerComponent {
     this.elapsedTime = new Date().getTime() - this.lastStart;
   }
 
-  @HostListener('document:keydown', ['$event'])
-  onKeydown(ev: KeyboardEvent): void {
-
+  onClick(ev : MouseEvent) {
     ev.preventDefault();
     ev.stopPropagation();
+    this.handleStartStop();
+  }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(ev: KeyboardEvent): void {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.handleStartStop();
+  }
+
+  handleStartStop() {
     if (!this.running) {
       this.running = true;
       this.lastStart = new Date().getTime();

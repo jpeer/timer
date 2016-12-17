@@ -11,20 +11,17 @@ import {Measurement} from "./measurement";
 })
 export class AppComponent implements OnInit {
 
-  currentSession: Measurement[] = [];
-  totalHistory: Measurement[] = [];
-  scramble: string[];
   userToken: string;
-  error: string;
+  scramble: string[];
+  totalHistory: Measurement[] = [];
   chartData: any[] = [];
+  error: string;
 
   constructor(private cubeService: CubeService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.cubeService.getNextScramble().subscribe(result => {
-      this.scramble = result;
-    });
+
     this.userToken = this.authService.getUserToken();
 
     this.cubeService.getAllMeasurements(this.userToken).subscribe(
@@ -37,14 +34,25 @@ export class AppComponent implements OnInit {
         console.log("ok got error: ", err);
         this.error = err;
       });
+
+    this.requestNewScramble();
   }
 
   onTimerDone(event: Measurement) {
-    this.currentSession.push(event);
+    this.totalHistory.push(event);
+    this.persistState();
+    this.requestNewScramble();
   }
 
   removeMeasurement(idx: number) {
-    this.currentSession.splice(idx, 1);
+    this.totalHistory.splice(idx, 1);
+    this.persistState();
+  }
+
+  requestNewScramble() {
+    this.cubeService.getNextScramble().subscribe(result => {
+      this.scramble = result;
+    });
   }
 
   updateChartData() {
@@ -57,12 +65,11 @@ export class AppComponent implements OnInit {
     this.chartData = [{name: "Runs", series: series}];
   }
 
-  storeNewMeasurements(): void {
-    this.cubeService.postMeasurements(this.currentSession, this.userToken).subscribe(
+  persistState(): void {
+    this.cubeService.persistMeasurements(this.totalHistory, this.userToken).subscribe(
       result => {
         console.log("result:", result);
         this.totalHistory = result;
-        this.currentSession = [];
         this.updateChartData();
       },
       err => {

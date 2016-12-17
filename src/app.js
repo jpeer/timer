@@ -35,10 +35,10 @@ app.use(express.static(__dirname));
 app.get('/scramble', function (req, res) {
   console.log("Module scramble:", scramble);
   var scramble = this.scramble.createScramble();
-  res.json(JSON.stringify(scramble));
+  res.json(scramble);
 }.bind({scramble: scramble}));
 
-app.post('/addMeasurements', function(req, res) {
+app.post('/persistMeasurements', function(req, res) {
   console.log("ok got:", req.body);
   var userToken = req.body.userToken;
   this.measurementsModel.findOne({'userToken' : userToken}, function(err, entity) {
@@ -46,8 +46,7 @@ app.post('/addMeasurements', function(req, res) {
       console.log("no such entity found, need to construct it first");
       entity = { userToken : userToken, measurements : req.body.measurements };
     } else {
-      console.log("ok adding new measurements to existing...")
-      entity.measurements.push.apply(entity.measurements, req.body.measurements);
+      entity.measurements =  req.body.measurements;
     }
 
     var obj = new this.measurementsModel(entity);

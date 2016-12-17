@@ -12,6 +12,8 @@ import { CubeService } from './cube.service';
 import { AuthService } from "./auth.service";
 import { ChartComponent } from './chart/chart.component';
 import { TimerComponent } from './timer/timer.component';
+import { DatePipe } from './date.pipe';
+import { ScramblePipe } from './scramble.pipe';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { TimerComponent } from './timer/timer.component';
     AppComponent,
     TimePipe,
     ChartComponent,
-    TimerComponent
+    TimerComponent,
+    DatePipe,
+    ScramblePipe
   ],
   imports: [
     BrowserModule,
