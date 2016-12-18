@@ -9,9 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico",
-        "app.js",
-        "scramble.js"
+        "favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",

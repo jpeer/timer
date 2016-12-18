@@ -1,7 +1,5 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs/Rx';
+import {Component, OnInit} from '@angular/core';
 import {CubeService} from './cube.service';
-import {AuthService} from "./auth.service";
 import {Measurement} from "./measurement";
 
 @Component({
@@ -11,20 +9,17 @@ import {Measurement} from "./measurement";
 })
 export class AppComponent implements OnInit {
 
-  userToken: string;
   scramble: string[];
   totalHistory: Measurement[] = [];
   chartData: any[] = [];
   error: string;
 
-  constructor(private cubeService: CubeService, private authService: AuthService) {
+  constructor(private cubeService: CubeService) {
   }
 
   ngOnInit(): void {
 
-    this.userToken = this.authService.getUserToken();
-
-    this.cubeService.getAllMeasurements(this.userToken).subscribe(
+    this.cubeService.getAllMeasurements().subscribe(
       result => {
         console.log("got all measurements: ", result);
         this.totalHistory = result;
@@ -50,34 +45,21 @@ export class AppComponent implements OnInit {
   }
 
   requestNewScramble() {
-    this.cubeService.getNextScramble().subscribe(result => {
-      this.scramble = result;
-    });
+    this.scramble = this.cubeService.getNextScramble();
   }
 
   updateChartData() {
-    console.log("updateChartData!");
     let i = 0;
     var series = this.totalHistory.map(item => {
       i++;
       return {name: i, value: item.elapsedTime}
     });
-    this.chartData = [{name: "Runs", series: series}];
+    this.chartData = [{name: "Time for Solve", series: series}];
   }
 
   persistState(): void {
-    this.cubeService.persistMeasurements(this.totalHistory, this.userToken).subscribe(
-      result => {
-        console.log("result:", result);
-        this.totalHistory = result;
-        this.updateChartData();
-      },
-      err => {
-        console.log("got error: ", err);
-        this.error = err;
-      }
-    );
-
+    this.updateChartData();
+    this.cubeService.persistMeasurements(this.totalHistory);
   }
 
 

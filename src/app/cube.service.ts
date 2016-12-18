@@ -1,28 +1,35 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, RequestOptions} from '@angular/http';
 import {Observable} from "rxjs";
-import {error} from "util";
 import {Measurement} from "./measurement";
+import {LocalStorageService} from "ng2-webstorage";
 
 
 @Injectable()
 export class CubeService {
 
-  constructor(private http: Http) { }
+  constructor(private localStorage: LocalStorageService) { }
 
-  getNextScramble() : Observable<string[]> {
-    return this.http.get("/scramble").map(res => res.json());
+  getNextScramble() : string[] {
+    var moves = [ "U", "L", "F", "R", "B", "D", "U'", "L'", "F'", "R'", "B'", "D'"  ];
+
+    var result = [];
+    for(var i = 0; i < 20; i++) {
+      var idx = Math.floor(Math.random() * moves.length);
+      result.push(moves[idx]);
+    }
+
+    return result;
   }
 
-  getAllMeasurements(usertoken: string) : Observable<Measurement[]> {
-    return this.http.get("/getMeasurements/" + usertoken).map(res => res.json().measurements);
+  getAllMeasurements() : Observable<Measurement[]> {
+    return Observable.create(function(observer) {
+      observer.next(this.localStorage.retrieve("measurements"));
+      observer.complete();
+    }.bind(this));
   }
 
-  persistMeasurements(measurements: Measurement[], userToken: string) : Observable<Measurement[]> {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.post("/persistMeasurements", { measurements: measurements, userToken : userToken  }, options).map(res => res.json().measurements);
+  persistMeasurements(measurements: Measurement[]) : void {
+    this.localStorage.store("measurements", measurements);
   }
 
 
