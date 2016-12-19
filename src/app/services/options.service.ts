@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, BehaviorSubject} from "rxjs";
-import {Options} from "./options";
+import {Options} from "../options";
 
 @Injectable()
 export class OptionsService {

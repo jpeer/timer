@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CubeService} from './cube.service';
-import {Measurement} from "./measurement";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Measurement} from "./measurement";
+import {CubeService} from './services/cube.service';
+import {OptionsService} from "./services/options.service";
 import {OptionsComponent} from "./options/options.component";
-import {OptionsService} from "./options.service";
 import {Options} from "./options";
 
 @Component({
@@ -71,7 +71,5 @@ export class AppComponent implements OnInit {
     console.log('opening modal');
     const modalRef = this.modalService.open(OptionsComponent);
   }
-
-
 
 }

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Measurement} from './measurement';
+import {Measurement} from '../measurement';
 import {LocalStorageService} from 'ng2-webstorage';
-
 
 @Injectable()
 export class CubeService {
