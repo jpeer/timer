@@ -195,4 +195,4 @@ Cube.prototype.render = function () {
   return result;
 }
 
-module.exports = { Cube: Cube}
+module.exports = { Cube: Cube }

@@ -14,6 +14,7 @@ import { DatePipe } from './date.pipe';
 import { ScramblePipe } from './scramble.pipe';
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { ScrambleComponent } from './scramble/scramble.component';
+import { ColorPipe } from './color.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ScrambleComponent } from './scramble/scramble.component';
     TimerComponent,
     DatePipe,
     ScramblePipe,
-    ScrambleComponent
+    ScrambleComponent,
+    ColorPipe
   ],
   imports: [
     BrowserModule,

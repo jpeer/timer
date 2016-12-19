@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-sm-6">
+    <p class="scramble">{{scramble | scramblepipe}}</p>
+  </div>
+  <div class="col-sm-1" *ngFor="let s of ['F','L','R','B','U','D']">
+    <div>{{s}}</div>
+    <table>
+      <tr>
+        <td [style.backgroundColor]="rc[s][0][0] | color"></td>
+        <td [style.backgroundColor]="rc[s][0][1] | color"></td>
+        <td [style.backgroundColor]="rc[s][0][2] | color"></td>
+      </tr>
+      <tr>
+        <td [style.backgroundColor]="rc[s][1][0] | color"></td>
+        <td [style.backgroundColor]="rc[s][1][1] | color"></td>
+        <td [style.backgroundColor]="rc[s][1][2] | color"></td>
+      </tr>
+      <tr>
+        <td [style.backgroundColor]="rc[s][2][0] | color"></td>
+        <td [style.backgroundColor]="rc[s][2][1] | color"></td>
+        <td [style.backgroundColor]="rc[s][2][2] | color"></td>
+      </tr>
+    </table>
+  </div>
+</div>
