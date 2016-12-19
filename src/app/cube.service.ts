@@ -23,7 +23,8 @@ export class CubeService {
 
   getAllMeasurements() : Observable<Measurement[]> {
     return Observable.create(function(observer) {
-      observer.next(this.localStorage.retrieve('measurements'));
+      let data = this.localStorage.retrieve('measurements');
+      observer.next(!data ? [] : data);
       observer.complete();
     }.bind(this));
   }
