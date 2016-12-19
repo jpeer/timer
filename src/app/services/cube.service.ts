@@ -18,9 +18,7 @@ export class CubeService {
   }
 
   isInverseMove(m1: string, m2: string) {
-    let result = this.movesPairs[m1] === m2;
-    console.log('isInverseMove(', m1, ',' ,m2, ')', result);
-    return result;
+    return this.movesPairs[m1] === m2;
   }
 
   getNextScramble(length: number): string[] {
@@ -41,7 +39,6 @@ export class CubeService {
       }
 
       result.push(candidate);
-      console.log(result);
     }
 
     return result;

@@ -15,11 +15,11 @@
 
 <div class="container-fluid" style="background-color: lightcyan">
   <div class="row">
-    <div class="col-sm-6">
+    <div>
       <app-timer (onDone)="onTimerDone($event)" [scramble]="scramble"></app-timer>
     </div>
-    <div class="col-sm-6">
-      <div *ngIf="totalHistory.length > 0" style="padding: 30px">
+    <div>
+      <div *ngIf="totalHistory.length > 0">
         <app-chart [multi]="chartData"></app-chart>
       </div>
       <div *ngIf="totalHistory.length == 0">Start cubing and track your progress!</div>
@@ -43,7 +43,7 @@
       <td>{{totalHistory.length - idx}}</td>
       <td>{{m.startTime | date}}</td>
       <td>{{m.elapsedTime | time}}</td>
-      <td>{{m.scramble}}</td>
+      <td>{{m.scramble | scramblepipe}}</td>
       <td><button (click)="removeMeasurement(totalHistory.length - idx - 1)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
     </tr>
     </tbody>

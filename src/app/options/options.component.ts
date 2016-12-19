@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder} from "@angular/forms";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {OptionsService} from "../options.service";
+
+import {OptionsService} from "../services/options.service";
 import {Options} from "../options";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-options',
@@ -21,7 +21,6 @@ export class OptionsComponent implements OnInit {
 
   form : FormGroup;
   initialOptions: Options;
-  initialSubscription: Subscription;
 
   ngOnInit() {
       this.form = this.fb.group(
