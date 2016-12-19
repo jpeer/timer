@@ -18,7 +18,6 @@ export class ScrambleComponent {
 
   @Input()
   set scramble(value : string[]) {
-    console.log("setter!")
     this._scramble = value;
     let cube = new Cube();
     for(let i = 0; i < value.length; i++) {

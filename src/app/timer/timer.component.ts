@@ -31,9 +31,13 @@ export class TimerComponent {
 
   @HostListener('document:keydown', ['$event'])
   onKeydown(ev: KeyboardEvent): void {
+
     ev.preventDefault();
     ev.stopPropagation();
-    this.handleStartStop();
+
+    if(ev.keyCode === 32) {
+      this.handleStartStop();
+    }
   }
 
   handleStartStop() {
@@ -49,6 +53,5 @@ export class TimerComponent {
       this.onDone.emit({startTime: this.lastStart, elapsedTime: this.elapsedTime, scramble: this.scramble});
     }
   }
-
 
 }

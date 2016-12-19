@@ -1,5 +1,5 @@
 .scramble {
-  font-size: 30px;
+  font-size: 26px;
 }
 
 table {
@@ -8,11 +8,11 @@ table {
 }
 
 table th {
-  height: 27px;
+  height: 25px;
 }
 
 table td {
   width: 50px;
-  height: 27px;
+  height: 25px;
   border: 1px solid white;
 }

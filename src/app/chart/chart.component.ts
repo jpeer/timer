@@ -10,7 +10,7 @@ export class ChartComponent  {
   @Input('multi')
   multi;
 
-  view: any[] = [ 700, 400 ];
+  view: any[] = [ 600, 380 ];
 
   // options
   showXAxis = true;
@@ -28,5 +28,3 @@ export class ChartComponent  {
   // line, area
   autoScale = true;
 }
-
-

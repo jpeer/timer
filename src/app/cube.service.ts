@@ -13,7 +13,7 @@ export class CubeService {
     var moves = [ 'U', 'L', 'F', 'R', 'B', 'D', 'u', 'l', 'f', 'r', 'b', 'd'  ];
 
     var result = [];
-    for(var i = 0; i < 7; i++) {
+    for(var i = 0; i < 25; i++) {
       var idx = Math.floor(Math.random() * moves.length);
       result.push(moves[idx]);
     }
