@@ -2,10 +2,12 @@
   <a class="navbar-brand" href="#">Cube Success ++</a>
   <ul class="nav navbar-nav">
     <li class="nav-item navbar-right">
-      <a class="nav-link" href="#">Options</a>
+      <a class="nav-link" href="#" (click)="openOptions()">Options</a>
     </li>
   </ul>
 </nav>
+
+<template ngbModalContainer></template>
 
 <div class="container-fluid" style="background-color: aquamarine; padding: 20px">
   <app-scramble [scramble] = "scramble" (click)="requestNewScramble()"></app-scramble>
@@ -17,10 +19,10 @@
       <app-timer (onDone)="onTimerDone($event)" [scramble]="scramble"></app-timer>
     </div>
     <div class="col-sm-6">
-      <div *ngIf="totalHistory.length > 0">
+      <div *ngIf="totalHistory.length > 0" style="padding: 30px">
         <app-chart [multi]="chartData"></app-chart>
       </div>
-      <div *ngIf="totalHistory.length == 0">Start cubing and graph your progress!</div>
+      <div *ngIf="totalHistory.length == 0">Start cubing and track your progress!</div>
     </div>
   </div>
 </div>
@@ -42,7 +44,7 @@
       <td>{{m.startTime | date}}</td>
       <td>{{m.elapsedTime | time}}</td>
       <td>{{m.scramble}}</td>
-      <td><i class="fa fa-times" aria-hidden="true" (click)="removeMeasurement(totalHistory.length - idx - 1)"></i></td>
+      <td><button (click)="removeMeasurement(totalHistory.length - idx - 1)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
     </tr>
     </tbody>
   </table>

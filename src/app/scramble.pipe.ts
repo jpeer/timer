@@ -19,7 +19,7 @@ export class ScramblePipe implements PipeTransform {
 
   private translate(s: string) {
     switch(s) {
-      case "l": return "U'";
+      case "l": return "L'";
       case "f": return "F'";
       case "r": return "R'";
       case "b": return "B'";

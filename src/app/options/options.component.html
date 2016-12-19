@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Options</h4>
+</div>
+<div class="modal-body">
+  <form novalidate [formGroup]="form">
+
+    <label>Scramble Size</label>
+    <select class="form-control" formControlName="scrambleSize" (change)="optionsChanged()">
+      <option *ngFor="let nr of [5, 10, 15, 20, 25, 30, 35, 40]" [value]="nr">{{nr}}</option>
+    </select>
+
+    <label>Color Theme</label>
+    <select class="form-control" formControlName="colorTheme" (change)="optionsChanged()">
+      <option *ngFor="let scheme of ['default']" [value]="scheme">{{scheme}}</option>
+    </select>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+</div>

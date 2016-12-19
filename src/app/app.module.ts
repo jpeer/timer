@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NG2D3Module } from 'ng2d3';
@@ -15,6 +15,8 @@ import { ScramblePipe } from './scramble.pipe';
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { ScrambleComponent } from './scramble/scramble.component';
 import { ColorPipe } from './color.pipe';
+import { OptionsComponent } from './options/options.component';
+import {OptionsService} from "./options.service";
 
 @NgModule({
   declarations: [
@@ -25,17 +27,19 @@ import { ColorPipe } from './color.pipe';
     DatePipe,
     ScramblePipe,
     ScrambleComponent,
-    ColorPipe
+    ColorPipe,
+    OptionsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     NG2D3Module,
     Ng2Webstorage
   ],
-  providers: [CubeService],
+  providers: [CubeService, OptionsService],
+  entryComponents: [OptionsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

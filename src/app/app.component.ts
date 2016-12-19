@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CubeService} from './cube.service';
 import {Measurement} from "./measurement";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {OptionsComponent} from "./options/options.component";
+import {OptionsService} from "./options.service";
+import {Options} from "./options";
 
 @Component({
   selector: 'app-root',
@@ -13,11 +17,10 @@ export class AppComponent implements OnInit {
   totalHistory: Measurement[] = [];
   chartData: any[] = [];
   error: string;
+  options: Options;
 
-  constructor(private cubeService: CubeService) {
-  }
-
-  ngOnInit(): void {
+  constructor(private cubeService: CubeService, private modalService: NgbModal, private optionsService: OptionsService ) {
+    this.optionsService.getOptionsObject().subscribe(opt => this.options = opt);
 
     this.cubeService.getAllMeasurements().subscribe(
       result => {
@@ -29,7 +32,9 @@ export class AppComponent implements OnInit {
         console.log("ok got error: ", err);
         this.error = err;
       });
+  }
 
+  ngOnInit(): void {
     this.requestNewScramble();
   }
 
@@ -45,7 +50,7 @@ export class AppComponent implements OnInit {
   }
 
   requestNewScramble() {
-    this.scramble = this.cubeService.getNextScramble();
+    this.scramble = this.cubeService.getNextScramble(this.options.scrambleSize);
   }
 
   updateChartData() {
@@ -61,6 +66,12 @@ export class AppComponent implements OnInit {
     this.updateChartData();
     this.cubeService.persistMeasurements(this.totalHistory);
   }
+
+  openOptions() {
+    console.log('opening modal');
+    const modalRef = this.modalService.open(OptionsComponent);
+  }
+
 
 
 }
