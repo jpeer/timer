@@ -13,6 +13,7 @@ import { TimerComponent } from './timer/timer.component';
 import { DatePipe } from './date.pipe';
 import { ScramblePipe } from './scramble.pipe';
 import { Ng2Webstorage } from 'ng2-webstorage';
+import { ScrambleComponent } from './scramble/scramble.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { Ng2Webstorage } from 'ng2-webstorage';
     ChartComponent,
     TimerComponent,
     DatePipe,
-    ScramblePipe
+    ScramblePipe,
+    ScrambleComponent
   ],
   imports: [
     BrowserModule,

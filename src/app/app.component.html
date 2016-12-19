@@ -8,7 +8,7 @@
 </nav>
 
 <div class="container-fluid" style="background-color: aquamarine">
-  <p class="scramble" (click)="requestNewScramble()" >{{scramble | scramblepipe}}</p>
+  <app-scramble [scramble] = "scramble" (click)="requestNewScramble()"></app-scramble>
 </div>
 
 <div class="container-fluid" style="background-color: greenyellow">
@@ -24,7 +24,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="container-fluid" style="background-color: khaki" *ngIf="totalHistory.length > 0">
   <table class="table table-striped">
@@ -48,4 +47,3 @@
     </tbody>
   </table>
 </div>
-
