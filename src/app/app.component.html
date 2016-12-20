@@ -19,10 +19,11 @@
       <app-timer (onDone)="onTimerDone($event)" [scramble]="scramble"></app-timer>
     </div>
     <div>
-      <div *ngIf="totalHistory.length > 0">
+      <div *ngIf="totalHistory.length > 1">
         <app-chart [multi]="chartData"></app-chart>
       </div>
       <div *ngIf="totalHistory.length == 0">Start cubing and track your progress!</div>
+      <div *ngIf="totalHistory.length == 1">Keep cubing! Chart will be shown after second data point is available</div>
     </div>
   </div>
 </div>
