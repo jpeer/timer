@@ -15,8 +15,6 @@ Rubik's cube timer app, deployed at [https://jpeer.github.io/timer](https://jpee
 
 ## TODO:
 
-
-* Allow clear / truncate / condense cubing times history
 * Allow a bit more customization, e.g. coloring themes
 * Allow Cube Inspection Phase, ideally with "beeep" audio played when time begins to run
 * Round off various rough edges in code and CSS layout

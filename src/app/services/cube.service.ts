@@ -56,4 +56,8 @@ export class CubeService {
     this.measurements.next(measurements);
   }
 
+  clearMeasurements() : void {
+      this.measurements.next([]);
+  }
+
 }

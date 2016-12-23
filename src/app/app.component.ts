@@ -70,4 +70,8 @@ export class AppComponent implements OnInit {
     const modalRef = this.modalService.open(OptionsComponent);
   }
 
+  clearHistory() {
+    this.cubeService.clearMeasurements();
+  }
+
 }
