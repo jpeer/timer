@@ -18,6 +18,7 @@ import { ChartComponent } from './chart/chart.component';
 import { TimerComponent } from './timer/timer.component';
 import { ScrambleComponent } from './scramble/scramble.component';
 import { OptionsComponent } from './options/options.component';
+import { StatsComponent } from './stats/stats.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { OptionsComponent } from './options/options.component';
     ScramblePipe,
     ScrambleComponent,
     ColorPipe,
-    OptionsComponent
+    OptionsComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

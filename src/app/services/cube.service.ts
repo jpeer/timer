@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, BehaviorSubject} from 'rxjs';
 import {Measurement} from '../measurement';
 import {LocalStorageService} from 'ng2-webstorage';
 
@@ -8,6 +8,7 @@ export class CubeService {
 
   moves: string[];
   movesPairs: {};
+  measurements: BehaviorSubject<Measurement[]>;
 
   constructor(private localStorage: LocalStorageService) {
     this.moves = ['U', 'L', 'F', 'R', 'B', 'D', 'u', 'l', 'f', 'r', 'b', 'd'];
@@ -15,6 +16,8 @@ export class CubeService {
       'U': 'u', 'L': 'l', 'F': 'f', 'R': 'r', 'B': 'b', 'D': 'd',
       'u': 'U', 'l': 'L', 'f': 'F', 'r': 'R', 'b': 'B', 'd': 'D'
     }
+    let data = this.localStorage.retrieve('measurements');
+    this.measurements = new BehaviorSubject(data ? data : []);
   }
 
   isInverseMove(m1: string, m2: string) {
@@ -45,15 +48,12 @@ export class CubeService {
   }
 
   getAllMeasurements(): Observable<Measurement[]> {
-    return Observable.create(function (observer) {
-      let data = this.localStorage.retrieve('measurements');
-      observer.next(!data ? [] : data);
-      observer.complete();
-    }.bind(this));
+    return this.measurements.asObservable();
   }
 
   persistMeasurements(measurements: Measurement[]): void {
     this.localStorage.store('measurements', measurements);
+    this.measurements.next(measurements);
   }
 
 }

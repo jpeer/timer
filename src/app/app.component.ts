@@ -24,8 +24,7 @@ export class AppComponent implements OnInit {
 
     this.cubeService.getAllMeasurements().subscribe(
       result => {
-        console.log("got all measurements: ", result);
-        this.totalHistory = result;
+        this.totalHistory = result.slice();
         this.updateChartData();
       },
       err => {
@@ -63,7 +62,6 @@ export class AppComponent implements OnInit {
   }
 
   persistState(): void {
-    this.updateChartData();
     this.cubeService.persistMeasurements(this.totalHistory);
   }
 
